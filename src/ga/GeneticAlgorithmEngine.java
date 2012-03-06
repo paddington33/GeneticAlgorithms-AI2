@@ -7,7 +7,7 @@ import java.util.Random;
 public class GeneticAlgorithmEngine 
 {
 	private ArrayList<GeneticAlgorithm> population = new ArrayList<GeneticAlgorithm>();
-	private int populationSize = 100; //default
+	private int populationSize = 2000; //default
 	private Class<?> populationClass;
 	
 	public GeneticAlgorithmEngine(int populationSize,Class<?> populationClass) {
@@ -25,7 +25,7 @@ public class GeneticAlgorithmEngine
 			
 			ArrayList<Chromosome> cs = new ArrayList<Chromosome>();
 
-			for(int j = 0;j<16;j++)
+			for(int j = 0;j<56;j++) ///Make DYNAMIC!!
 				cs.add(new NeuralNetworkChromosome(random.nextGaussian()));
 			
 			try {
@@ -44,7 +44,7 @@ public class GeneticAlgorithmEngine
 	
 	public void nextGeneration()
 	{
-		int noParents = 10;
+		int noParents = 100;
 		
 		Collections.sort(population);
 		
@@ -83,7 +83,8 @@ public class GeneticAlgorithmEngine
 		}
 
 		double aveFit = 0.0;
-		//Print generation
+		
+		//Print generation fitness 
 		for(GeneticAlgorithm f : nextGeneration)
 		{
 			aveFit += f.getFitness();

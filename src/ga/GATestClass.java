@@ -9,7 +9,7 @@ public class GATestClass {
 		GeneticAlgorithmEngine ga = new GeneticAlgorithmEngine(1000, NeuralNetworkPopWrapper.class);
 		ga.generatePopulation();
 
-		for(int i = 0;i<1000;i++)
+		for(int i = 0;i<10000;i++)
 			ga.nextGeneration();
 	}
 
