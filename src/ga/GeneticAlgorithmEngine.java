@@ -24,10 +24,9 @@ public class GeneticAlgorithmEngine
 		{
 			
 			ArrayList<Chromosome> cs = new ArrayList<Chromosome>();
-			cs.add(new MyChromosomeImp(random.nextGaussian()));
-			cs.add(new MyChromosomeImp(random.nextGaussian()));
-			cs.add(new MyChromosomeImp(random.nextGaussian()));
-			cs.add(new MyChromosomeImp(random.nextGaussian()));
+
+			for(int j = 0;j<16;j++)
+				cs.add(new NeuralNetworkChromosome(random.nextGaussian()));
 			
 			try {
 				subject = (GeneticAlgorithm) populationClass.newInstance();
@@ -65,7 +64,7 @@ public class GeneticAlgorithmEngine
 			GeneticAlgorithm firstParrent = parents.get(indexOfFirstParent);
 			GeneticAlgorithm secondParrent = parents.get(indexOfSecondParent);
 			
-			ArrayList<Chromosome> offspringChromosomes = onePointCrossOverStrategy(firstParrent.getChromosomes(), secondParrent.getChromosomes());
+			ArrayList<? extends Chromosome> offspringChromosomes = onePointCrossOverStrategy(firstParrent.getChromosomes(), secondParrent.getChromosomes());
 			
 			mutateChromosomes(offspringChromosomes);			
 			
@@ -95,20 +94,20 @@ public class GeneticAlgorithmEngine
 	}
 	
 	
-	private void mutateChromosomes(ArrayList<Chromosome> chromosomes) {
+	private void mutateChromosomes(ArrayList<? extends Chromosome> chromosomes) {
 		Random random = new Random();
 		for(Chromosome chromosome : chromosomes)
 		{
 			if(random.nextDouble() > 2.0/chromosomes.size())
 			{
-				double value = ((MyChromosomeImp)chromosome).getValue();
+				double value = (Double) chromosome.getValue();
 				value += random.nextGaussian()/100.0;
-				((MyChromosomeImp)chromosome).setValue(value);
+				chromosome.setValue(value);
 			}
 		}
 	}
 
-	public ArrayList<Chromosome> onePointCrossOverStrategy(ArrayList<Chromosome> c1, ArrayList<Chromosome> c2)
+	public ArrayList<? extends Chromosome> onePointCrossOverStrategy(ArrayList<? extends Chromosome> c1, ArrayList<? extends Chromosome> c2)
 	{
 		//Assume same size, always same order
 		Random random = new Random();

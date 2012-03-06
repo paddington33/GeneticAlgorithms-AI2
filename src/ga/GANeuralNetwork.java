@@ -8,6 +8,7 @@ import neuralNets.NeuronConnection;
 
 public class GANeuralNetwork extends NeuralNetwork implements GeneticAlgorithm {
 
+
 	public GANeuralNetwork(ArrayList<ArrayList<Neuron>> network) {
 		super(network);
 	}
@@ -18,7 +19,7 @@ public class GANeuralNetwork extends NeuralNetwork implements GeneticAlgorithm {
 	}
 
 	@Override
-	public void buildByChromosomes(ArrayList<Chromosome> chromosomes) {
+	public void buildByChromosomes(ArrayList<? extends Chromosome> chromosomes) {
 		int index = 0;
 		for(ArrayList<Neuron> layer : network)
 		{

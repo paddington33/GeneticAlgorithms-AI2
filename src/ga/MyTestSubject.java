@@ -10,11 +10,12 @@ public class MyTestSubject implements GeneticAlgorithm {
 	public MyTestSubject() {
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
-	public void buildByChromosomes(ArrayList<Chromosome> chromosomes) {
-		this.chromosomes = chromosomes;
+	public void buildByChromosomes(ArrayList<? extends Chromosome> chromosomes) {
+		this.chromosomes = (ArrayList<Chromosome>) chromosomes;
 		for(Chromosome chromosome : chromosomes)
-			fitness += ((MyChromosomeImp)chromosome).getValue();
+			fitness += (Double)chromosome.getValue();
 	}
 
 	@Override
